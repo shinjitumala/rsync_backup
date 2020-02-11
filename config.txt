@@ -1,0 +1,14 @@
+dest:
+/mnt/bak
+dirs:
+/home/shinjitumala/E_DRIVE
+/home/shinjitumala/.config
+/home/shinjitumala/.config/Code - OSS/User/settings.json
+/home/shinjitumala/.config/Code - OSS/User/keybindings.json
+/home/shinjitumala/.xscreensaver
+/home/shinjitumala/.tmux.conf
+blacklist:
+/home/shinjitumala/E_DRIVE/TiTech/tools/build
+/home/shinjitumala/.config/Code - OSS
+rsync_flags:
+-aPh --relative --delete

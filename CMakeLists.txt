@@ -20,18 +20,36 @@ ExternalProject_Add(
     EXCLUDE_FROM_ALL TRUE
 )
 
+# Find LLVM
+find_package(LLVM REQUIRED CONFIG)
+message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
+llvm_map_components_to_libnames(REQ_LLVM_LIBRARIES
+    support
+)
+
 add_executable(rsync_backup)
 add_dependencies(rsync_backup FPR_LIB-build)
 
+add_compile_options(
+    -Wall
+)
+
+add_definitions(
+    ${LLVM_DEFINITIONS}
+)
+
 target_link_directories(rsync_backup
     PRIVATE ${FPR_LIB_DIR}/build
+    PRIVATE ${LLVM_LINK_DIRS}
 )
 target_link_libraries(rsync_backup
     FPR
+    ${REQ_LLVM_LIBRARIES}
 )
 target_include_directories(rsync_backup
     PRIVATE include
     PRIVATE ${FPR_LIB_DIR}/include
+    PRIVATE ${LLVM_INCLUDE_DIRS}
 )
 
 add_subdirectory(src)
